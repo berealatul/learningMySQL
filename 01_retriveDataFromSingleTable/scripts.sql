@@ -248,5 +248,135 @@ system cls;
     SELECT *
     FROM customers
     WHERE phone NOT LIKE "%9";
-    
 
+system cls;
+-- REGEXP Operator
+    /*
+        no case sensitive
+        ^ for begining of string
+        $ for end of string
+        | logical or
+        [ab]c is for ac or bc
+        [a-h]k is for ak, bk, ck, ..., hk 
+    */
+
+    -- retrive customers whose last name starts with 'B'
+    SELECT *
+    FROM customers
+    WHERE last_name REGEXP "^b";
+
+    -- retrive customers whose last name ends with 'ey'
+    SELECT *
+    FROM customers
+    WHERE last_name REGEXP "ey$";
+
+    -- retrive customers whose addresses contain TRAIL or AVENUE or DRIVE
+    SELECT *
+    FROM customers
+    WHERE address REGEXP "TRAIL|AVENUE|DRIVE";
+
+    -- retrive customer whose last name contains mac or ends with field or start with rose
+    SELECT *
+    FROM customers
+    WHERE last_name REGEXP "mac|field$|^rose";
+
+    -- retrive customers whose last name contains ge, ie, me
+    SELECT *
+    FROM customers
+    WHERE last_name REGEXP "[gim]e";
+    
+    -- last name contains ae, be, ce, de, ee, fe, ge, he
+    SELECT *
+    FROM customers
+    WHERE last_name REGEXP "[a-h]e";
+
+    -- EXERCISE
+    -- first name are ELKA or AMBUR
+    SELECT *
+    FROM customers
+    WHERE first_name REGEXP "ELKA|AMBUR";
+
+    -- last name ends with EY or ON
+    SELECT *
+    FROM customers
+    WHERE last_name REGEXP "EY$|ON$";
+
+    -- last name starts with MY or contains SE
+    SELECT *
+    FROM customers
+    WHERE last_name REGEXP "^MY|SE";
+
+    -- last name contain B followed by r or u
+    SELECT *
+    FROM customers
+    WHERE last_name REGEXP "b[ru]";
+
+system cls;
+
+-- IS NULL Operator
+    -- we can't directly check for phone == NULL and have to use IS NULL operator
+    
+    -- retrive customers who does not have phone
+    SELECT *
+    FROM customers
+    WHERE phone IS NULL;
+
+    -- retrive customers who does have a phone
+    SELECT *
+    FROM customers
+    WHERE phone IS NOT NULL;
+
+    -- get orders that are not shipped
+    SELECT *
+    FROM orders
+    WHERE shipper_id IS NULL;
+
+system cls;
+-- ORDER BY Clause
+    -- default is by primary key ascending
+    -- ORDER BY columnName
+        -- default is ASCENDING
+        -- for decending use DESC
+    -- in MySQL even if some column is not in select clause still we can sort based on that
+
+    SELECT first_name , last_name, points
+    FROM customers
+    ORDER BY points DESC;
+
+    -- although credit column not in table still valid MySQL query
+    SELECT first_name , last_name, 10 AS credit
+    FROM customers
+    ORDER BY credit;
+  
+    -- EXERCISE
+    -- sort item by total price in descending order of order id 2
+    SELECT *
+    FROM order_items
+    WHERE order_id = 2
+    ORDER BY (quantity * unit_price) DESC;
+
+    -- more descriptive
+    SELECT *, (quantity * unit_price) AS total_price
+    FROM order_items
+    WHERE order_id = 2
+    ORDER BY total_price DESC;
+
+system cls;
+
+-- LIMIT Clause
+    -- limit query to fized size of m
+    SELECT *
+    FROM customers
+    LIMIT 3;
+    
+    -- offset can be used to skip first n rows and then thow next m
+    -- skip first 5 customers and then show next 3 customers
+    SELECT *
+    FROM customers
+    LIMIT 5, 3;
+
+    -- get top three loyal customers (more points then every one else)
+    SELECT *
+    FROM customers
+    ORDER BY points DESC
+    LIMIT 3;
