@@ -2,6 +2,13 @@
     -- to run scripts from file
     -- source filename.sql
 
+    /*
+    how to save output to text file
+        tee output.txt; -- to initialize query result to be saved to file
+        source scripts.sql; -- for running scripts from file
+        notee; -- for closing result saving to file
+    */
+    
     -- to clear screen
     system cls;
 
