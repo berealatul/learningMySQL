@@ -214,13 +214,13 @@ INSERT INTO `order_items` VALUES (10,9,9,4.28);
 
 CREATE TABLE `sql_store`.`order_item_notes` (
   `note_id` INT NOT NULL,
-  `order_Id` INT NOT NULL,
+  `order_id` INT NOT NULL,
   `product_id` INT NOT NULL,
   `note` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`note_id`));
 
-INSERT INTO `order_item_notes` (`note_id`, `order_Id`, `product_id`, `note`) VALUES ('1', '1', '2', 'first note');
-INSERT INTO `order_item_notes` (`note_id`, `order_Id`, `product_id`, `note`) VALUES ('2', '1', '2', 'second note');
+INSERT INTO `order_item_notes` (`note_id`, `order_id`, `product_id`, `note`) VALUES ('1', '1', '2', 'first note');
+INSERT INTO `order_item_notes` (`note_id`, `order_id`, `product_id`, `note`) VALUES ('2', '1', '2', 'second note');
 
 
 DROP DATABASE IF EXISTS `sql_hr`;
